@@ -3,7 +3,7 @@ using with SDL 1.2 (Simple DirectMedia Layer) library.
 
 To build on the Ubuntu Linux for examples:
 
-    $ sudo apt-get install libsdl1.2-dev libsdl-gfx1.2-dev
+    $ sudo apt-get install libsdl1.2-dev
     $ make
     $ ./bricksdl
     $ make clean

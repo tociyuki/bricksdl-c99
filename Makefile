@@ -7,7 +7,7 @@ OBJECTS=box.o motion.o viewsdl.o main.o
 SDL_CFLAGS := $(shell sdl-config --cflags)
 SDL_LDFLAGS := $(shell sdl-config --libs)
 CFLAGS+=-std=c99 -O3 $(SDL_CFLAGS)
-LDFLAGS+=$(SDL_LDFLAGS) -lSDL_gfx
+LDFLAGS+=$(SDL_LDFLAGS)
 
 all: $(SOURCES) $(EXECUTABLE)
 
