@@ -103,7 +103,7 @@ draw_decimal (SDL_Surface* const screen, int const x, int const y, int n)
 static void
 draw_digit (SDL_Surface* const screen, int const x, int const y, char ch)
 {
-	int k = ch - '0';
+    int k = ch - '0';
     for (int j = 0; j < 7; j++) {
         int bits = chbmp[k][j];
         for (int i = 0; i < 5; i++) {
