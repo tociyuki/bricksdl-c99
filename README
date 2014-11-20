@@ -1,0 +1,16 @@
+bricksdl is a simplified clone of Attari Breakout game
+using with SDL 1.2 (Simple DirectMedia Layer) library.
+
+To build on the Ubuntu Linux for examples:
+
+    $ sudo apt-get install libsdl1.2-dev libsdl-gfx1.2-dev
+    $ make
+    $ ./bricksdl
+    $ make clean
+
+To play:
+
+    Mouse left button down -- Release the ball / Game continue
+    Mouse move -- Move the paddle
+    Click window close button -- quit game
+
