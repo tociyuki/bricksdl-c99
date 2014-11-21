@@ -11,7 +11,9 @@ typedef struct motion_s {
     box_t* lifebox;
     box_t* brickgrid;
     int paddle_speed_limit;
-    int ball_speed_limit;
+    int ball_hspeed_limit;
+    int ball_hspeed_factor;
+    int ball_vspeed;
     int ball_cought;
     int ball_life_from;
     int ball_life;

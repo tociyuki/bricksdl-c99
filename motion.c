@@ -85,7 +85,9 @@ ball_motion (motion_t* const game, int const paddle_speed, int const releaseball
         offset_box (ball, h1 - h0, 0, ball);
         if (releaseball) {
             game->ball_cought = false;
-            set_boxspeed (paddle->hspeed / 4, -4, ball);
+            int const gh = paddle->hspeed / game->ball_hspeed_factor;
+            int const gv = -game->ball_vspeed;
+            set_boxspeed (gh, gv, ball);
         }
     }
     else {
@@ -93,7 +95,7 @@ ball_motion (motion_t* const game, int const paddle_speed, int const releaseball
             if (! hit_brick (game))
                 bounce_field (game);
         }
-        if (ball->bottom == field->bottom) {
+        if (ball->bottom >= field->bottom) {
             if (--game->ball_life > 0)
                 continue_motion (game);
         }
@@ -122,7 +124,7 @@ hit_paddle (motion_t* const game, box_t* const paddle0)
     box_t* const paddle = game->paddle;
     if (ball->vspeed > 0 && vhit_box (game->field, paddle0, ball)) {
         int const x = ball->hspeed + paddle->hspeed;
-        int const limit = game->ball_speed_limit;
+        int const limit = game->ball_hspeed_limit;
         int const speed = x > limit ? limit : x < -limit ? -limit : x;
         set_boxspeed (speed, -ball->vspeed, ball);
         return true;

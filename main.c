@@ -12,7 +12,9 @@ enum {
     FPS = 60,
 
     PADDLE_SPEED_LIMIT = 16,
-    BALL_SPEED_LIMIT = 4,
+    BALL_HSPEED_LIMIT = 4,
+    BALL_HSPEED_FACTOR = 4,
+    BALL_VSPEED = 4,
     BALL_LIFE_FROM = 5,
     BRICKGRID_HSIZE = 14,
     BRICKGRID_VSIZE = 8,
@@ -53,7 +55,9 @@ static void
 game_setup (motion_t* const game)
 {
     game->paddle_speed_limit = PADDLE_SPEED_LIMIT;
-    game->ball_speed_limit = BALL_SPEED_LIMIT;
+    game->ball_hspeed_limit = BALL_HSPEED_LIMIT;
+    game->ball_hspeed_factor = BALL_HSPEED_FACTOR;
+    game->ball_vspeed = BALL_VSPEED;
     game->ball_life_from = BALL_LIFE_FROM;
     game->brick_gap = BRICK_GAP;
 
