@@ -154,11 +154,11 @@ draw_fillcircle (SDL_Surface* const screen,
     int y = 0;
     int e = 1 - x;
     while (x >= y) {
-        rect.x = x0 - x; rect.y = y0 + y; rect.w = 2 * x; rect.h = 1;
+        rect.x = x0 - x; rect.y = y0 + y - 1; rect.w = 2 * x; rect.h = 1;
         SDL_FillRect (screen, &rect, color);
         rect.x = x0 - x; rect.y = y0 - y; rect.w = 2 * x; rect.h = 1;
         SDL_FillRect (screen, &rect, color);
-        rect.x = x0 - y; rect.y = y0 + x; rect.w = 2 * y; rect.h = 1;
+        rect.x = x0 - y; rect.y = y0 + x - 1; rect.w = 2 * y; rect.h = 1;
         SDL_FillRect (screen, &rect, color);
         rect.x = x0 - y; rect.y = y0 - x; rect.w = 2 * y; rect.h = 1;
         SDL_FillRect (screen, &rect, color);

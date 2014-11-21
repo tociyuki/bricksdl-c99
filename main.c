@@ -16,7 +16,7 @@ enum {
     BALL_LIFE_FROM = 5,
     BRICKGRID_HSIZE = 14,
     BRICKGRID_VSIZE = 8,
-    BRICK_GAP = 2,
+    BRICK_GAP = 1,
 
     FIELD_LEFT = 16,
     FIELD_TOP = 16,
@@ -96,7 +96,7 @@ game_mainloop ()
         SCREEN_BPP, SDL_SWSURFACE);
     if (screen == NULL)
         return EXIT_FAILURE;
-    SDL_WM_SetCaption ("bricksdl - breakout with Simple DirectMedia Layer", NULL);
+    SDL_WM_SetCaption ("bricksdl on Simple DirectMedia Layer", NULL);
 
     int cmd = 0;
     while (! (cmd & CMD_QUIT)) {

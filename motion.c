@@ -19,14 +19,14 @@ void
 init_motion (motion_t* const game)
 {
     box_t* const brk0 = ref_brick (game, 0, 0);
-    int const brick_width = brk0->right - brk0->left;
-    int const brick_height = brk0->bottom - brk0->top;
+    int const brick_width = brk0->right - brk0->left + 1;
+    int const brick_height = brk0->bottom - brk0->top + 1;
     for (int j = 0; j < game->grid_vsize; j++) {
         for (int i = 0; i < game->grid_hsize; i++) {
             box_t* const brick = ref_brick (game, i, j);
             int const left = brk0->left + (brick_width + game->brick_gap) * i;
             int const top = brk0->top + (brick_height + game->brick_gap) * j;
-            set_box (left, top, left + brick_width, top + brick_height,
+            set_box (left, top, left + brick_width - 1, top + brick_height - 1,
                 0, 0, brick);
             brick->alive = true;
         }
