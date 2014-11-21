@@ -3,7 +3,9 @@
 #include "viewsdl.h"
 #include "SDL/SDL.h"
 
-static char const chbmp[10][8] = {
+enum { FONT_WIDTH = 5, FONT_HEIGHT = 7 };
+
+static char const font7x5[10][8] = {
     {0x0e, 0x11, 0x13, 0x15, 0x19, 0x11, 0x0e, 0}, /* 0 */
     {0x04, 0x0c, 0x04, 0x04, 0x04, 0x04, 0x0e, 0}, /* 1 */
     {0x0e, 0x11, 0x01, 0x02, 0x04, 0x08, 0x1f, 0}, /* 2 */
@@ -22,22 +24,22 @@ static void draw_paddle (SDL_Surface* const screen, motion_t* const game);
 static void draw_bricks (SDL_Surface* const screen, motion_t* const game);
 static void draw_decimal (SDL_Surface* const screen, int const x, int const y, int n);
 static void draw_digit (SDL_Surface* const screen, int const x, int const y, char ch);
-static void draw_fillcircle (SDL_Surface* const screen,
-    int x0, int y0, int radius, int r, int g, int b);
 static void draw_fillbox (SDL_Surface* const screen,
     int left, int top, int right, int bottom, int r, int g, int b);
+static void draw_fillcircle (SDL_Surface* const screen,
+    int x0, int y0, int radius, int r, int g, int b);
 
 void
 draw_frame (SDL_Surface* const screen, motion_t* const game)
 {
-    SDL_FillRect (screen, NULL, 0xd9d9d9);
+    SDL_FillRect (screen, NULL, SDL_MapRGB(screen->format, 217, 217, 217));
     draw_field (screen, game);
     draw_paddle (screen, game);
     draw_ball (screen, game);
     draw_bricks (screen, game);
-    draw_decimal (screen, SCORE_H, SCORE_V, game->score);
+    draw_decimal (screen, game->scorebox->left, game->scorebox->top, game->score);
     int const n = game->ball_life > 0 ? game->ball_life - 1 : 0;
-    draw_decimal (screen, LIVES_H, LIVES_V, n);
+    draw_decimal (screen, game->lifebox->left, game->lifebox->top, n);
 }
 
 static void
@@ -107,9 +109,9 @@ static void
 draw_digit (SDL_Surface* const screen, int const x, int const y, char ch)
 {
     int k = ch - '0';
-    for (int j = 0; j < 7; j++) {
-        int bits = chbmp[k][j];
-        for (int i = 0; i < 5; i++) {
+    for (int j = 0; j < FONT_HEIGHT; j++) {
+        int bits = font7x5[k][j];
+        for (int i = 0; i < FONT_WIDTH; i++) {
             if (bits & (1 << (4 - i))) {
                 int const h = x + 3 * i;
                 int const v = y + 3 * j;

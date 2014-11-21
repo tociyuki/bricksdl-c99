@@ -17,23 +17,14 @@ static bool hhit_box (box_t* const field, box_t* const a, box_t* const ball);
 void
 init_motion (motion_t* const game)
 {
-    game->paddle_speed_limit = PADDLE_SPEED_LIMIT;
-    game->ball_speed_limit = BALL_SPEED_LIMIT;
-    game->ball_life_from = BALL_LIFE_FROM;
-    game->grid_hsize = BRICKGRID_HSIZE;
-    game->grid_vsize = BRICKGRID_VSIZE;
-
-    set_box (FIELD_LEFT, FIELD_TOP, FIELD_RIGHT, FIELD_BOTTOM, 0, 0, game->field);
-    set_box (PADDLE_LEFT, PADDLE_TOP, PADDLE_RIGHT, PADDLE_BOTTOM, 0, 0, game->paddle);
-    set_box (BALL_LEFT, BALL_TOP, BALL_RIGHT, BALL_BOTTOM, 0, 0, game->ball);
-
-    int const brick_width = BRICK_RIGHT - BRICK_LEFT;
-    int const brick_height = BRICK_BOTTOM - BRICK_TOP;
+    box_t* const brk0 = ref_brick (game, 0, 0);
+    int const brick_width = brk0->right - brk0->left;
+    int const brick_height = brk0->bottom - brk0->top;
     for (int j = 0; j < game->grid_vsize; j++) {
         for (int i = 0; i < game->grid_hsize; i++) {
             box_t* const brick = ref_brick (game, i, j);
-            int const left = BRICK_LEFT + (brick_width + BRICK_GAP) * i;
-            int const top = BRICK_TOP + (brick_height + BRICK_GAP) * j;
+            int const left = brk0->left + (brick_width + game->brick_gap) * i;
+            int const top = brk0->top + (brick_height + game->brick_gap) * j;
             set_box (left, top, left + brick_width, top + brick_height,
                 0, 0, brick);
             brick->alive = true;
