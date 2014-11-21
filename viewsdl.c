@@ -22,17 +22,21 @@ static void draw_field (SDL_Surface* const screen, motion_t* const game);
 static void draw_ball (SDL_Surface* const screen, motion_t* const game);
 static void draw_paddle (SDL_Surface* const screen, motion_t* const game);
 static void draw_bricks (SDL_Surface* const screen, motion_t* const game);
-static void draw_decimal (SDL_Surface* const screen, int const x, int const y, int n);
-static void draw_digit (SDL_Surface* const screen, int const x, int const y, char ch);
+static void draw_decimal (SDL_Surface* const screen,
+    int const x, int const y, int const n);
+static void draw_digit (SDL_Surface* const screen,
+    int const x, int const y, char const ch);
 static void draw_fillbox (SDL_Surface* const screen,
-    int left, int top, int right, int bottom, int r, int g, int b);
+    int const left, int const top, int const right, int const bottom,
+    int const r, int const g, int const b);
 static void draw_fillcircle (SDL_Surface* const screen,
-    int x0, int y0, int radius, int r, int g, int b);
+    int const x0, int const y0, int const radius,
+    int const r, int const g, int const b);
 
 void
 draw_frame (SDL_Surface* const screen, motion_t* const game)
 {
-    SDL_FillRect (screen, NULL, SDL_MapRGB(screen->format, 217, 217, 217));
+    SDL_FillRect (screen, NULL, SDL_MapRGB (screen->format, 217, 217, 217));
     draw_field (screen, game);
     draw_paddle (screen, game);
     draw_ball (screen, game);
@@ -45,7 +49,7 @@ draw_frame (SDL_Surface* const screen, motion_t* const game)
 static void
 draw_field (SDL_Surface* const screen, motion_t* const game)
 {
-    box_t* field = game->field;
+    box_t* const field = game->field;
     draw_fillbox (screen,
         field->left - 4, field->top - 4, field->right + 4, field->bottom,
         255, 255, 255);
@@ -60,7 +64,7 @@ draw_ball (SDL_Surface* const screen, motion_t* const game)
     if (game->ball_life <= 0 || game->brick_count <= 0)
         return;
 
-    box_t* ball = game->ball;
+    box_t* const ball = game->ball;
     int const w = (ball->right - ball->left) / 2;
     int const h = (ball->bottom - ball->top) / 2;
     draw_fillcircle (screen,
@@ -71,7 +75,7 @@ draw_ball (SDL_Surface* const screen, motion_t* const game)
 static void
 draw_paddle (SDL_Surface* const screen, motion_t* const game)
 {
-    box_t* paddle = game->paddle;
+    box_t* const paddle = game->paddle;
     draw_fillbox (screen,
         paddle->left, paddle->top, paddle->right, paddle->bottom,
         250, 250, 250);
@@ -92,7 +96,7 @@ draw_bricks (SDL_Surface* const screen, motion_t* const game)
 }
 
 static void
-draw_decimal (SDL_Surface* const screen, int const x, int const y, int n)
+draw_decimal (SDL_Surface* const screen, int const x, int const y, int const n)
 {
     int r = n % 10;
     int q = n / 10;
@@ -106,11 +110,11 @@ draw_decimal (SDL_Surface* const screen, int const x, int const y, int n)
 }
 
 static void
-draw_digit (SDL_Surface* const screen, int const x, int const y, char ch)
+draw_digit (SDL_Surface* const screen, int const x, int const y, char const ch)
 {
-    int k = ch - '0';
+    int const k = ch - '0';
     for (int j = 0; j < FONT_HEIGHT; j++) {
-        int bits = font7x5[k][j];
+        int const bits = font7x5[k][j];
         for (int i = 0; i < FONT_WIDTH; i++) {
             if (bits & (1 << (4 - i))) {
                 int const h = x + 3 * i;
@@ -123,7 +127,8 @@ draw_digit (SDL_Surface* const screen, int const x, int const y, char ch)
 
 static void
 draw_fillbox (SDL_Surface* const screen,
-    int left, int top, int right, int bottom, int r, int g, int b)
+    int const left, int const top, int const right, int const bottom,
+    int const r, int const g, int const b)
 {
     SDL_Rect rect;
 
@@ -131,7 +136,7 @@ draw_fillbox (SDL_Surface* const screen,
     rect.y = top;
     rect.w = right - left + 1;
     rect.h = bottom - top + 1;
-    SDL_FillRect (screen, &rect, SDL_MapRGB(screen->format, r, g, b));
+    SDL_FillRect (screen, &rect, SDL_MapRGB (screen->format, r, g, b));
 }
 
 /* see
@@ -139,10 +144,11 @@ draw_fillbox (SDL_Surface* const screen,
  */
 static void
 draw_fillcircle (SDL_Surface* const screen,
-    int x0, int y0, int radius, int r, int g, int b)
+    int const x0, int const y0, int const radius,
+    int const r, int const g, int const b)
 {
     SDL_Rect rect;
-    Uint32 color = SDL_MapRGB(screen->format, r, g, b);
+    Uint32 const color = SDL_MapRGB (screen->format, r, g, b);
 
     int x = radius;
     int y = 0;

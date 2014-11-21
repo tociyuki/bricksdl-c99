@@ -7,7 +7,8 @@ static void start_motion (motion_t* const game);
 static void continue_motion (motion_t* const game);
 static void ball_motion (motion_t* const game,
     int const paddle_speed, int const releaseball);
-static void slide_paddle (motion_t* const game, box_t* paddle0, int const speed0);
+static void slide_paddle (motion_t* const game,
+    box_t* const paddle0, int const speed0);
 static bool hit_paddle (motion_t* const game, box_t* const paddle0);
 static bool hit_brick (motion_t* const game);
 static bool bounce_field (motion_t* const game);
@@ -100,7 +101,7 @@ ball_motion (motion_t* const game, int const paddle_speed, int const releaseball
 }
 
 static void
-slide_paddle (motion_t* const game, box_t* paddle0, int const speed0)
+slide_paddle (motion_t* const game, box_t* const paddle0, int const speed0)
 {
     box_t* const paddle = game->paddle;
     box_t* const field = game->field;
@@ -188,7 +189,7 @@ vhit_box (box_t* const field, box_t* const a, box_t* const ball)
     box_t a1;
     box_t ball1;
 
-    int dv = ball->vspeed < 0 ? a->bottom - ball->top : a->top - ball->bottom;
+    int const dv = ball->vspeed < 0 ? a->bottom - ball->top : a->top - ball->bottom;
     offset_box (ball, dv * ball->hspeed / ball->vspeed, dv, &ball1);
     offset_box (a, dv * a->hspeed / ball->vspeed, 0, &a1);
     if (a->hspeed != 0)
@@ -209,7 +210,7 @@ hhit_box (box_t* const field, box_t* const a, box_t* const ball)
 {
     box_t ball1;
 
-    int dh = ball->hspeed < 0 ? a->right - ball->left : a->left - ball->right;
+    int const dh = ball->hspeed < 0 ? a->right - ball->left : a->left - ball->right;
     offset_box (ball, dh, dh * ball->vspeed / ball->hspeed, &ball1);
     if (((ball->hspeed < 0 && dh <= 0) || (ball->hspeed > 0 && dh >= 0))
             && int_abs (dh) <= int_abs (ball->hspeed)
