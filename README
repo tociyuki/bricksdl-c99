@@ -1,4 +1,4 @@
-bricksdl is a simplified clone of Attari Breakout game
+bricksdl is a simplified clone of Atari Breakout game
 using with SDL 1.2 (Simple DirectMedia Layer) library.
 
 To build on the Ubuntu Linux for examples:

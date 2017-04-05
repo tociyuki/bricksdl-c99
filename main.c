@@ -3,7 +3,6 @@
 #include "viewsdl.h"
 #include "SDL/SDL.h"
 #include <stdlib.h>
-#include <stdbool.h>
 
 enum {
     SCREEN_WIDTH = 640,
